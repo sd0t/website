@@ -1,0 +1,43 @@
+/*
+    CSS FOR SIGN UP sdot stylesheet {s.dot}
+    http://cis444.cs.csusm.edu/nguye208/sdot/html/signup/signup.html    
+
+    ** DENISE THUY VY NGUYEN 
+    ** =^.,.^= 10-23-2017
+*/
+.top_container, .bottom_container{
+    color: #F8F8FF; /* Ghost White */
+    padding: 20px;
+}
+
+.header, .footer{
+    padding: 5px;
+    background-color: #F8F8FF;
+}
+#menu, #social_media_links{
+    color: #000000;
+    text-align: center;
+}
+/* MAIN BODY */
+.body_container{
+    width: 80%;          /* Makes container smaller than body */
+    margin-left: auto;   /* Centers container within body */
+    margin-right: auto;
+    background-color:;
+
+}
+.main_body{
+    padding: 5px;
+    background-color: #000000;
+}
+#main_content{
+    color: #F8F8FF;
+    text-align: center;
+}
+/* FOOTER */
+
+
+.h1{
+  color: #FFFFFF;
+}
+
