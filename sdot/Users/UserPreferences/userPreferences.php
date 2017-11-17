@@ -1,0 +1,8 @@
+// USERPREFERNCES.PHP FOR PROFILE USER EDITS
+//** DENISE THUY VY NGUYEN 
+//** =^.,.^= 11-16-2-17
+//UPDATES USER INFO
+
+<?php 
+$_POST['action_button']; 
+?> 
