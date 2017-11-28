@@ -24,6 +24,14 @@
   </head>
 
   <body>
+  
+  <?php
+  //this is to store the project id.
+  $storeproject = $_GET['idProject'];
+  ?>
+  
+           
+  
     <header>
 <!--TOP NAV-->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -80,66 +88,80 @@
             </li>        
           </ul>
         </nav>
-
-
-
-        </nav>
-
-<!--MAIN CONTENT DIV-->
-        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-          <h1>Selected Project: {s.dot} Project 001
-          <img src="../../../Resources/images/sdot.png" width="autp" height="50" align="text-center"></h1>
-         
-
- <h2>{s.dot}</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Project Name</th>
-                  <td>{s.dot}</td>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <th>Collaborators</th>
-                  <td>Max Harrell</td>
-                  <td>Alex Hom </td>
-                  <td>Denise Nguyen</td>
-                  <td>Cody R. Solley</td>
-                  <td>Victor Zavala</td>
-
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-
-          <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>sdot</h4>
-              <div class="text-muted">Project 1</div>
-            </div>
-          </section>
-          
-
-
-          </div>
-        </main>
-<!--END MAIN CONTENT-->
-
-
-
-      </div>
+ </div>
     </div>
+		
+ <?php
+			 $link = mysqli_connect("localhost", "zaval035", "q29A05", "zaval035");
 
-          
-          </div>
-        </main>
-      </div>
-    </div>
+			if (!$link) {
+				echo "Error: Unable to connect to MySQL." . PHP_EOL;
+				echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+				echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+				exit;
+			}
+			 
+			// query
+			$sql = "SELECT ProjectID, ProjectName, PM.PMProjectID, PM.PMUserID, PU.FName, PU.LName FROM Projects
+			inner join ProjectMembers PM ON PM.PMProjectID = Projects.ProjectID
+			inner join Users PU ON PU.UserID = PM.PMUserID
+			WHERE Projects.ProjectID = '" . $storeproject . "'";
+			
+			
+			if ($result=mysqli_query($link,$sql))
+			  {
+				
+					$counter = 0;
+					$projectName = "";
+				// Fetch one and one row
+			  while ($row=mysqli_fetch_row($result))
+				{
+				if ($counter == 0){
+					$projectName = $row[1];
+					echo "<main role='main' class='col-sm-9 ml-sm-auto col-md-10 pt-3'>
+					<h1>Selected Project: ". $row[1] ."
+					<img src='../../../Resources/images/sdot.png' width='autp' height='50' align='text-center'></h1>
+				 
+
+					<h2>{s.dot}</h2>
+					<div class='table-responsive'>
+					<table class='table table-striped'>
+					  <thead>
+						<tr>
+						  <th>Project Name</th>
+						  <td>". $row[1] ."</td>
+						</tr>
+					  </thead>
+
+					  <tbody>
+						<tr>
+						  <th>Collaborators</th>";
+				}		  
+				echo "<td>  ". $row[4] .",  ". $row[5] ."    </td>";				
+				++$counter;
+				}
+				echo "</tr>
+					  </tbody>
+						</table>
+					</div>
+
+
+				  <section class='row text-center placeholders'>
+					<div class='col-6 col-sm-3 placeholder'>
+					  <img src='data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=' width='200' height='200' class='img-fluid rounded-circle' alt='Generic placeholder thumbnail'>
+					  <h4>sdot</h4>
+					  <div class='text-muted'>". $projectName ."</div>
+					</div>
+				  </section>
+				  </main>";
+			  // Free result set
+			  mysqli_free_result($result);
+			}
+
+			mysqli_close($link); 	
+			   ?>
+
+     
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -1,7 +1,6 @@
 <!--
-  ADD TASK {s.dot}
-  http://cis444.cs.csusm.edu/nguye208/sdot/html/addTask.html
-
+  ADD A BUG PAGE {s.dot}
+  http://cis444.cs.csusm.edu/nguye208/sdot/html/addBug.html
   ** DENISE THUY VY NGUYEN 
   ** =^.,.^= 10-23-2017
 -->
@@ -14,12 +13,12 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>{s.dot} Create Project</title>
-    <link rel="icon" href="../images/sdot.png" />
+    <title>{s.dot} Add Bug</title>
+    <link rel="icon" href="../../../Resources/images/sdot.png" />
 
 
 <!--BOOTSTRAP-->
-     <link href="../../../Resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../Resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../../../Resources/css/sdot.css" rel="stylesheet">
     <link href="../../../Resources/css/dashboard.css" rel="stylesheet">
@@ -27,18 +26,22 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      
 
-
+<!--TOP NAV-->
+     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="../../../Resources/html/index.html">
+        <img src="../../../Resources/images/sdot.png" width="autp" height="25" align="text-center">
+      {s.dot}
+    </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
 <!--TOP NAV-->
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../../../../Resources/html/index.html">Home</a>
+            <a class="nav-link" href="../../../Resources/html/index.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../../Project/CreateProject/createProject.html">Create Project</a>
@@ -70,16 +73,16 @@
          <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="../ProjectOverview/chooseProject.html">Project Hub</a>
+              <a class="nav-link" href="../ProjectOverviewchooseProject.html">Project Hub</a>
             </li>
             <li>
-              <a class="nav-link" href="../ProjectOverview/selectproject1.html">Selected Project Overview</a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link " href="../ProjectOverview/sproject1bug.html">Bug Tracker</a>
+              <a class="nav-link" href="../ProjectOverviewselectproject1.html">Selected Project Overview</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link active" href="../ProjectOverview/sproject1task.html">Task Tracker</a>
+              <a class="nav-link active" href="sproject1bug.html">Bug Tracker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../TaskTracking/sproject1task.html">Task Tracker</a>
             </li>
             <li class="nav-item ">
               <a class="nav-link " href="../DevForum/devforum.html">Dev Forum</a>
@@ -96,98 +99,119 @@
             </li>
              <li class="nav-item"> 
               <a class="nav-link" href="../ProjectOverview/selectedProject.html">Selected Project Overview</a> </li>
-            <li class="nav-item ">
-              <a class="nav-link " href="../ProjectOverview/sproject1bug.html">Bug Tracker</a>
-            </li>
             <li class="nav-item active">
-              <a class="nav-link active" href="../ProjectOverview/sproject1task.html">Task Tracker</a>
+              <a class="nav-link active" href=".sproject1bug.html">Bug Tracker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../TaskTracking/sproject1task.html">Task Tracker</a>
             </li>             
             <li class="nav-item ">
-              <a class="nav-link " href="../DevForum/devForum.html">Dev Form</a>
+              <a class="nav-link " href="../DevForum/devForum.html">Dev Forum</a>
             </li>   
           </ul>
           
         </nav>
 
  
+
 <!-- MAIN BODU 
   User will create a new project
 -->
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-          <h1>Create New Task
+          <h1>Create New Bug Task
             <img src="../images/sdot.png" width="autp" height="50" style="text-align:center"></h1>
        
             <section class="row text-center placeholders">
 
           </section>
+		  
+<!--PHP-->	  
+<?php
+$link = mysqli_connect("localhost", "zaval035", "q29A05", "zaval035");
 
-<!--NEW TASK FORM-->
-            <form action ="addTask.php" id="myForm" method="post">
-           <h2>Adding new task</h2>
+if (!$link) {
+    echo "Error: Unable to create Bug" . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+
+echo "You have created a Bug!" . PHP_EOL;
+
+
+// Escape user inputs for security
+$BugID = mysqli_real_escape_string($link, $_REQUEST['BugID']);
+$SourceFile = mysqli_real_escape_string($link, $_REQUEST['SourceFile']);
+$Location = mysqli_real_escape_string($link, $_REQUEST['Location']);
+$Description = mysqli_real_escape_string($link, $_REQUEST['Description']);
+$BProjectID = mysqli_real_escape_string($link, $_REQUEST['BProjectID']);
+$BReporterID = mysqli_real_escape_string($link, $_REQUEST['BReporterID']);
+$BAssignedID = mysqli_real_escape_string($link, $_REQUEST['BAssignedID']);
+
+// attempt insert query execution
+$sql = "INSERT INTO Bugs (SourceFile, Location, Description, BReporterID, BAssignedID) 
+WHERE 
+VALUES ('$SourceFile','$Location','$Description','$BReporterID','$BAssignedID')";
+if(mysqli_query($link, $sql)){
+    echo "Bug added successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+mysqli_close($link);
+?>		
+
+<!--NEW BUG FORM-->
+          <form id = "myForm">
+           <h2>Bug Added</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Priority:</th>
+                  <th>Reporter:</th>
                   <td>
-		    <select name="Priority" id = "priority" >
-		      <option value = "Critical"> Critical </option>
-		      <option value = "Important"> Important </option>
-		      <option value = "Normal"> Normal </option>
-		      <option value = "Less Concern"> Less Concern </option>
-		      </select> Enter in how important this task is
-
+                    <?php echo $_POST["BReporterID"]; ?>
                   </td>
                 </tr>
               </thead>
 
               <tbody>
                 <tr>
-                  <th>Task:</th>
+                  <th>Assigned to:</th>
                   <td>
-                    <input type = "text" id="task" size = "60" name = "Task" placeholder="Enter in task" onchange=""/>
+                   <?php echo $_POST["BAssignedID"]; ?>
                   </td>
                 </tr>
 
 
                   <tr>
-                  <th>Assigned To:</th>
+                  <th>Source File:</th>
                    <td>
-                    <input type = "text" id="assigned" size = "60" name = "TAssignedID" placeholder="Enter in who it is assigned to" onchange=""/>
+                   <?php echo $_POST["SourceFile"]; ?>
                   </td>
                 </tr>
 
                 <tr>
-                  <th>Completion:</th>
+                  <th>Location:</th>
                    <td>
-                    <input type = "text" id="completion" size = "60" name = "Complete" placeholder="" onchange=""/>
+                   <?php echo $_POST["Location"]; ?>
                   </td>
                 </tr>
 
 
                 <tr>
-                  <th>Scrum:</th>
+                  <th>Description:</th>
                    <td>
-                    <input type = "text" id="scrum1" size = "60" name = "SCRUM" placeholder="" onchange=""/>
+                  <?php echo $_POST["Description"]; ?>
                   </td>
                 </tr>
 
-                <tr>
-                  <th>Remarks:</th>
-                   <td>
-                    <input type = "text" id="scrum2" size = "60" name = "Remarks" placeholder="Enter in remarks about task" onchange=""/>
-                  </td>
-                </tr>
-
+          
               </tbody>
             </table>
           </div>
-
-         <input type = "submit" class="btn btn-lg btn-primary" name = "submit" value="ADD TASK">
-        <input type= "reset" class="btn btn-lg btn-primary" name="reset" value="CLEAR">
-   
       </form>
-<!--END NEW TASK FORM-->
+<!--END NEW BUG FORM-->
 
         </main>
       </div>
@@ -204,7 +228,7 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script type = "text/javascript"  src = "newTask.js"></script>
+    <script type = "text/javascript"  src = "newBug.js"></script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

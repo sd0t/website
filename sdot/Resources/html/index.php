@@ -41,16 +41,16 @@
             <a class="nav-link" href="../html/index.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../Project/CreateProject/createProject1.php">Create Project</a>
+            <a class="nav-link" href="../../Project/CreateProject/createProject.html">Create Project</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.php">Choose Project</a>
+            <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.html">Choose Project</a>
           </li>
          <li class="nav-item">
             <a class="nav-link" href="../../Users/UserPreferences/userPreferences.html">User Preferences</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../Users/logout.php">Logout</a>
+            <a class="nav-link" href="../../Users/logout.html">Logout</a>
           </li>
         </ul>
         </div>

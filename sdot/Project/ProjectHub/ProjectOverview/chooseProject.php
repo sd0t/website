@@ -1,9 +1,9 @@
 <!--
-  DEVFORM {s.dot}
-  http://cis444.cs.csusm.edu/nguye208/sdot/html/devform.html
-
+ PROJECTOVERVIEW {s.dot}
+  http://cis444.cs.csusm.edu/nguye208/sdot/html/projectoverview.html
+  
   ** DENISE THUY VY NGUYEN 
-  ** =^.,.^= 10-23-2017
+  ** =^.,.^= 10-23-2-17
 -->
 <!doctype html>
 <html lang="en">
@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-    <title>{s.dot} User Selects Project</title>
+    <title>{s.dot} Choose Project</title>
       <link rel="icon" href="../../../Resources/images/sdot.png" />
 
   <!--BOOTSTRAP-->
@@ -32,7 +32,9 @@
       {s.dot}
     </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon">
+            
+          </span>
         </button>
 
 <!--TOP NAV-->
@@ -71,72 +73,94 @@
          <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="../ProjectOverviewchooseProject.html">Project Hub</a>
+              <a class="nav-link active" href="chooseProject.html">Project Hub</a>
             </li>
-            <li>
-              <a class="nav-link" href="../ProjectOverview/selectedProject.html">Selected Project Overview</a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link " href="../BugTracking/sproject1bug.html">Bug Tracker</a>
+<!--OTHER LINKS FOR DEEPER VIEWS
+            <li class="nav-item">
+              <a class="nav-link" href="../html/bugtrack.html">Bug Tracker</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../TaskTracking/sproject1task.html">Task Tracker</a>
+              <a class="nav-link" href="../html/tasktrack.html">Task Tracker</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link active" href="../DevForum/devforum.html">Dev Forum</a>
-            </li>   
+          -->
           </ul>
         </nav>
+
+<!--MAIN CONTENT-->
 
     <div class="container-fluid">
       <div class="row">
          <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <ul class="nav nav-pills flex-column">
-              <li class="nav-item"> 
-              <a class="nav-link" href="../ProjectOverview/chooseProject.html">Project Hub</a>       
+            <li class="nav-item active">
+              <a class="nav-link active" href="chooseProject.html">Project Hub</a>
             </li>
-             <li class="nav-item"> 
-              <a class="nav-link" href="../ProjectOverview/selectedProject.html">Selected Project Overview</a> </li>
-            <li class="nav-item ">
-              <a class="nav-link " href="../BugTracking/sproject1bug.html">Bug Tracker</a>
+<!---
+            <li class="nav-item">
+              <a class="nav-link" href="../html/bugtrack.html">Bug Tracker</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../TaskTracking/sproject1task.html">Task Tracker</a>
-            </li>             
-            <li class="nav-item active">
-              <a class="nav-link active" href="../DevForum/devForum.html">Dev Forum</a>
-            </li>   
+              <a class="nav-link " href="../html/tasktrack.html">Task Tracker</a>
+            </li>
           </ul>
-          
+-->
         </nav>
 
+	<!--PHP-->	  
+ 
 
 <!--MAIN CONTENT DIV-->
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-          <h1>{s.dot} Dev Form
-          <img src="../../../Resources/images/sdot.png" width="autp" height="50" align="text-center"></h1>
-            <h2>{s.dot}</h2>
+          <h1>Choose Project
+          <img src="../images/sdot.png" width="autp" height="50" align="text-center"></h1>
+         
+<b>Page:</b> Create Project
+Interactions: Display a form that allows for a project title, summary area and an area to add authorized users (by username).  Submit will generate a unique project number and create a new SQL row in the Project table then takes you back to the Choose Project page.</br>
+<b>Nav bar:</b> User Preferences, Choose Project, Create Project</br>
+<b>Nav Bar Interactions:</b> Choosing a link will take you to that item’s separate page, if the link for the current page is chosen, it will reload that page to the default state.
 
           <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>sdot</h4>
-              <div class="text-muted">Project 1</div>
-            </div>
+			<?php
+			 $link = mysqli_connect("localhost", "zaval035", "q29A05", "zaval035");
+
+			if (!$link) {
+				echo "Error: Unable to connect to MySQL." . PHP_EOL;
+				echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+				echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+				exit;
+			}
+
+			//recognize user with cookie
+			$UserID = isset($_COOKIE["SDOT_user_login"]); 
+			 
+			// attempt insert query execution
+			$sql = "SELECT ProjectID, ProjectName FROM Projects
+			inner join ProjectMembers PM ON PM.PMProjectID = Projects.ProjectID
+			WHERE PM.PMUserID = '" . $UserID . "'";
+			
+			if ($result=mysqli_query($link,$sql))
+			  {
+
+			  // Fetch one and one row
+			  while ($row=mysqli_fetch_row($result))
+				{
+				echo 
+						"<div class='col-6 col-sm-3 placeholder'>
+						  <img src='data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=' width='200' height='200' class='img-fluid rounded-circle' alt='Generic placeholder thumbnail'>
+						  <span class='text-muted'><a class='nav-link active' href='selectedProject.php?idProject=". $row[0] ."'>". $row[1] ."</a></span>
+						  
+						</div>";
+				}
+			  // Free result set
+			  mysqli_free_result($result);
+			}
+
+			mysqli_close($link); 	
+			   ?>                
+          
           </section>
-
-          <div class="maincontent">
-            <p id="actionbutton">Please type some things you'd like to discuss</p>
-            <form action ="">
-              <p>
-                <textarea name="handlertext" rows ="3" cols ="40" placeholder="{s.dot} DEV FORM"></textarea>
-                <p>
-                  <a class="btn btn-lg btn-primary" href="" role="button">POST</a>
-                  <a class="btn btn-lg btn-primary" href="" role="reset">CLEAR</a>
-
-      </p>
-    </form>
-   </div>  
+          
+ 
 
           </div>
         </main>
@@ -151,9 +175,6 @@
       </div>
     </div>
 
-      </body>
-</html>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -161,4 +182,5 @@
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-
+  </body>
+</html>

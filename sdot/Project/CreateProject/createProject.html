@@ -110,7 +110,7 @@
                 <tr>
                   <th>Project Name:</th>
                   <td>
-                    <input type = "text" id="projectName" size = "45" placeholder="Enter in a project name" onchange=""/>
+                    <input type = "text" id="projectName" size = "45" name = "ProjectName" placeholder="Enter in a project name" onchange=""/>
                   </td>
                 </tr>
               </thead>
@@ -119,7 +119,7 @@
                 <tr>
                   <th>Collaborators:</th>
                   <td>
-                    <input type = "text" id="collaborators" size = "45" placeholder="Enter in all collaborators" onchange=""/>
+                    <input type = "text" id="collaborators" size = "45" name = "Username" placeholder="Enter in all collaborators" onchange=""/>
                   </td>
 
                 </tr>
@@ -128,7 +128,7 @@
                   <tr>
                   <th>Project Summary:</th>
                    <td>
-                    <input type = "text" id="summary" size = "45" placeholder="Enter in a project description" onchange=""/>
+                    <input type = "text" id="summary" size = "45" name = "ProjectSummary" placeholder="Enter in a project description" onchange=""/>
                   </td>
                 </tr>
 
@@ -136,12 +136,9 @@
             </table>
           </div>
 
-          <a class="btn btn-lg btn-primary" role="button" value="GetProjectInfo" onclick="createProject();">
-          Create
-        </a>
-        <a class="btn btn-lg btn-primary" role="button" value="reset" onclick="clearProject()">
-          Clear
-        </a>
+        <input type = "submit" class="btn btn-lg btn-primary" name = "submit" value="CREATE">
+        <input type= "reset" class="btn btn-lg btn-primary" name="reset" value="CLEAR">
+
       </form>
 <!--END NEW PEOJECT FORM-->
 

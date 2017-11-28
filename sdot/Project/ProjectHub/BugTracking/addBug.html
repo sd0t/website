@@ -1,7 +1,6 @@
 <!--
   ADD A BUG PAGE {s.dot}
   http://cis444.cs.csusm.edu/nguye208/sdot/html/addBug.html
-
   ** DENISE THUY VY NGUYEN 
   ** =^.,.^= 10-23-2017
 -->
@@ -42,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../../../../Resources/html/index.html">Home</a>
+            <a class="nav-link" href="../../../Resources/html/index.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../../Project/CreateProject/createProject.html">Create Project</a>
@@ -80,10 +79,10 @@
               <a class="nav-link" href="../ProjectOverviewselectproject1.html">Selected Project Overview</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link active" href="../ProjectOverview/sproject1bug.html">Bug Tracker</a>
+              <a class="nav-link active" href="sproject1bug.html">Bug Tracker</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../ProjectOverview/sproject1task.html">Task Tracker</a>
+              <a class="nav-link" href="../TaskTracking/sproject1task.html">Task Tracker</a>
             </li>
             <li class="nav-item ">
               <a class="nav-link " href="../DevForum/devforum.html">Dev Forum</a>
@@ -101,13 +100,13 @@
              <li class="nav-item"> 
               <a class="nav-link" href="../ProjectOverview/selectedProject.html">Selected Project Overview</a> </li>
             <li class="nav-item active">
-              <a class="nav-link active" href="../ProjectOverview/sproject1bug.html">Bug Tracker</a>
+              <a class="nav-link active" href=".sproject1bug.html">Bug Tracker</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../ProjectOverview/sproject1task.html">Task Tracker</a>
+              <a class="nav-link" href="../TaskTracking/sproject1task.html">Task Tracker</a>
             </li>             
             <li class="nav-item ">
-              <a class="nav-link " href="../DevForum/devForum.html">Dev Form</a>
+              <a class="nav-link " href="../DevForum/devForum.html">Dev Forum</a>
             </li>   
           </ul>
           
@@ -127,7 +126,7 @@
           </section>
 
 <!--NEW BUG FORM-->
-          <form id = "myForm">
+         <form action ="addBug.php" id="myForm" method="post">
            <h2>Adding new bug task</h2>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -135,7 +134,7 @@
                 <tr>
                   <th>Reporter:</th>
                   <td>
-                    <input type = "text" id="reporter" size = "60" placeholder="Enter in your name" 
+                    <input type = "text" id="reporter" size = "60" name = "BReporterID" placeholder="Enter in your name" 
                     onchange=""/>
                   </td>
                 </tr>
@@ -145,7 +144,7 @@
                 <tr>
                   <th>Assigned to:</th>
                   <td>
-                    <input type = "text" id="assigned" size = "60" placeholder="Enter who will work on bug" onchange=""/>
+                    <input type = "text" id="assigned" size = "60" name = "BAssignedID" placeholder="Enter who will work on bug" onchange=""/>
                   </td>
                 </tr>
 
@@ -153,14 +152,14 @@
                   <tr>
                   <th>Source File:</th>
                    <td>
-                    <input type = "text" id="source" size = "60" placeholder="Enter the source file" onchange=""/>
+                    <input type = "text" id="source" size = "60" name = "SourceFile" placeholder="Enter the source file" onchange=""/>
                   </td>
                 </tr>
 
                 <tr>
                   <th>Location:</th>
                    <td>
-                    <input type = "text" id="location" size = "60" placeholder="Enter in where the location is" onchange=""/>
+                    <input type = "text" id="location" size = "60" name = "Location" placeholder="Enter in where the location is" onchange=""/>
                   </td>
                 </tr>
 
@@ -168,7 +167,7 @@
                 <tr>
                   <th>Description:</th>
                    <td>
-                    <input type = "text" id="description" size = "60" placeholder="Enter in how bug description" onchange=""/>
+                    <input type = "text" id="description" size = "60" name = "Description" placeholder="Enter in how bug description" onchange=""/>
                   </td>
                 </tr>
 
@@ -176,13 +175,9 @@
               </tbody>
             </table>
           </div>
-
-          <a class="btn btn-lg btn-primary" role="button" value="GetBug" onclick="createBug()">
-          Add Bug
-        </a>
-        <a class="btn btn-lg btn-primary" role="button" value="reset" onclick="clearProject()">
-          Clear
-        </a>
+		<input type = "submit" class="btn btn-lg btn-primary" name = "submit" value="ADD BUG">
+        <input type= "reset" class="btn btn-lg btn-primary" name="reset" value="CLEAR">
+         
       </form>
 <!--END NEW BUG FORM-->
 

@@ -77,36 +77,56 @@
 	          {s.dot}
 	        </p>
 
-	<!--NEW SIGNUP FORM-->
-	          <form id="myForm" action = "login.php" method = "post">
-	          <h2>Enter in user ID and password</h2>
-	          <div class="table-responsive">
-	            <table class="table table-striped">
-	              <thead>
-	                <tr>
-	                  <th>Username:</th>
-	                  <td>
-	                    <input type = "text" id="projectName" name = "Username" size = "60" placeholder="Enter in username" onchange=""/>
-	                  </td>
-	                </tr>
-	              </thead>
+	<!--PHP-->
+	 <?php
+ $link = mysqli_connect("localhost", "zaval035", "q29A05", "zaval035");
 
-	              <tbody>
-	                <tr>
-	                  <th>Password:</th>
-	                  <td>
-	                    <input type = "text" id="collaborators" name = "Password" size = "60" placeholder="Enter in a password" onchange=""/>
-	                  </td>
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+// Escape user inputs for security
+$Username = mysqli_real_escape_string($link, $_REQUEST['Username']);
+$Password = mysqli_real_escape_string($link, $_REQUEST['Password']);
+ 
+// attempt insert query execution
+$sql = "SELECT UserID, FName, LName FROM Users WHERE Username = '" . $Username . "' and Password = '" . $Password ."'";
+if ($result=mysqli_query($link,$sql))
+  {
+  $rowcount=mysqli_num_rows($result);
+  if ($rowcount == 1)
+  {
+	  $row=mysqli_fetch_row($result);
+	  
+		$cookie_name = "SDOT_user_login";
+		$cookie_name_info = $row[0];
+		
+		$cookie_FName = "SDOT_user_FName";
+		$cookie_FName_info = $row[1];
+		
+		$cookie_LName = "SDOT_user_LName";
+		$cookie_LName_info = $row[2];
+	
+	
+		// cookie set for one day 
+		setcookie($cookie_name, $cookie_name_info, time() + (86400), "/");
+	  
+	    
+	echo "<script type='text/javascript'>
+           window.location = '../Resources/html/index.php'
+      </script>";  
+  }
+  else echo "Error, cannot find the account. Please try again!";
+  mysqli_free_result($result);
+}
 
-	                </tr>
-	              </tbody>
-	            </table>
-	           <input class="btn btn-lg btn-primary" href="" type = "submit" value = "login">
-	          <input class="btn btn-lg btn-primary" type="reset" value="reset">
-	    </div>
-	  </form>
-	</div>
-	<!--END NEW PEOJECT FORM--> 
+mysqli_close($link);
+ 
+
+  	
+   ?>
 	  </body>
 	</html>
 

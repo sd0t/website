@@ -37,6 +37,7 @@
         </button>
 
 <!--TOP NAV-->
+         <?php setcookie("SDOT_user_login", "" , time() + (86400), "/"); ?>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
