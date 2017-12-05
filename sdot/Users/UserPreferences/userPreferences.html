@@ -44,6 +44,7 @@
             <a class="nav-link" href="../../Resources/html/index.html">Home</a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="../../Project/CreateProject/createProject.html">Create Project</a>
           </li>
           <li class="nav-item">
@@ -54,6 +55,18 @@
           </li>
           <li>
             <a class="nav-link" href="../logout.html">Logout</a>
+=======
+            <a class="nav-link" href="../../Project/CreateProject/createProject1.php">Create Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.php">Choose Project</a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="../../Users/UserPreferences/userPreferences.php">User Preferences</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../../Users/logout.php">Logout</a>
+>>>>>>> web-branch-v2
           </li>
         </ul>
 
@@ -113,16 +126,60 @@
 
 
 <!--USER PROFILE FORM-->
+<<<<<<< HEAD
     <form action= "UserPreferences.php" id = "usersPref"  action ="post" >
         <div class="table-responsive">
             <table class="table table-striped">
           <h3>Update your profile information</h3>
+=======
+          <?php
+
+            if(isset($_COOKIE["SDOT_user_login"])) {
+              $UserID = $_COOKIE["SDOT_user_login"];
+            }
+            else {
+            echo "<script type='text/javascript'>
+                  window.location = '../../../Users/login.html'
+                  </script>";
+            }
+
+            $conn = mysqli_connect("localhost", "group_e", "sdotDB", "group_e");
+
+            if (!$conn) {
+              echo "Error: Unable to create Bug" . PHP_EOL;
+              echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+              echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+              exit;
+            }
+
+            $qureyString = "SELECT Username, FName, LName, Password, Email FROM Users WHERE UserID = ". $UserID .";"
+
+             if($result = mysqli_query($conn, $queryString)){
+              while($row = mysqli_fetch_array($result)){
+
+
+              $Username = $row[0];
+              $FName = $row[1];
+              $LName = $row[2];
+              $Password = $row[3];
+              $Email = $row[4];
+
+              echo "
+  <form action= 'userPreferences.php' id = 'usersPref'  action ='post' >
+        <div class='table-responsive'>            
+    <table class='table table-striped'> 
+      <h3>Update your profile information</h3>
+>>>>>>> web-branch-v2
        <label>
               <thead>
                 <tr>
                   <th>First Name:</th>
                   <td>
+<<<<<<< HEAD
                     <input type = "text" id="first" size = "45" placeholder="Enter first name">
+=======
+                    <input type = 'text' id='first' name = 'FName' size = '45' value=". $FName .">
+>>>>>>> web-branch-v2
                   </td>
                 </tr>
               </label>
@@ -133,7 +190,11 @@
                 <tr>
                   <th>Last Name:</th>
                   <td>
+<<<<<<< HEAD
                     <input type = "text" id="last" size = "45" placeholder="Enter last name">
+=======
+                    <input type = 'text' id='last' name = 'LName' size = '45' value=". $LName .">
+>>>>>>> web-branch-v2
                   </td>
                 </tr>
               </label>
@@ -144,7 +205,11 @@
                 <tr>
                   <th>Username:</th>
                   <td>
+<<<<<<< HEAD
                     <input type = "text" id="username" size = "45" placeholder="Enter username">
+=======
+                    <input type = 'text' id='username' name = 'Username' size = '45' value=". $Username .">
+>>>>>>> web-branch-v2
                   </td>
                 </tr>
               </label>
@@ -155,7 +220,11 @@
                 <tr>
                   <th>Email:</th>
                   <td>
+<<<<<<< HEAD
                     <input type = "text" id="email" size = "45" placeholder="Enter email">
+=======
+                    <input type = 'text' id='email' name = 'Email' size = '45' value=". $Email .">
+>>>>>>> web-branch-v2
                   </td>
                 </tr>
               </label>
@@ -166,7 +235,11 @@
                 <tr>
                   <th>Password:</th>
                   <td>
+<<<<<<< HEAD
                     <input type = "password" id="intialp" size = "45" placeholder="Enter password">
+=======
+                    <input type = 'password' id='intialp' name = 'Password' size = '45' value=". $Password .">
+>>>>>>> web-branch-v2
                   </td>
                 </tr>
               </label>
@@ -177,17 +250,31 @@
                 <tr>
                   <th>Re-Enter Password:</th>
                   <td>
+<<<<<<< HEAD
                     <input type = "password" id="secondp" size = "45" placeholder="Re-enter password"/>
+=======
+                    <input type = 'password' id='secondp' name = 'Password' size = '45' value=". $Password ."/>
+>>>>>>> web-branch-v2
                   </td>
                 </tr>                                
                 <label>
               </tbody>
             </table>
 
+<<<<<<< HEAD
         <input type= "submit" class="btn btn-lg btn-primary"  name="sumbit" value="UPDATE">
         <input type= "reset" class="btn btn-lg btn-primary" name="reset" value="RESET">
 
       </form>
+=======
+        <input type= 'submit' class='btn btn-lg btn-primary'  name='sumbit' value='UPDATE'>
+        <input type= 'reset' class='btn btn-lg btn-primary' name='reset' value='RESET'>
+
+      </form>"
+
+          ?>
+
+>>>>>>> web-branch-v2
 <!--END USER PROFILE FORM--> 
 
 

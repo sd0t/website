@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// USERPREFERNCES.PHP FOR PROFILE USER EDITS
-//** DENISE THUY VY NGUYEN 
-//** =^.,.^= 11-16-2-17
-//UPDATES USER INFO
-
-<?php 
-$_POST['action_button']; 
-?> 
-=======
 
 <!--
   USER PREFERENCE {s.dot}
@@ -54,13 +44,13 @@ $_POST['action_button'];
             <a class="nav-link" href="../../Resources/html/index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../Project/CreateProject/createProject.php">Create Project</a>
+            <a class="nav-link" href="../../Project/CreateProject/createProject.html">Create Project</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.php">Choose Project</a>
           </li>
          <li class="nav-item">
-            <a class="nav-link active" href="userPreferences.php">User Preferences</a>
+            <a class="nav-link active" href="usersPreferences.html">User Preferences</a>
           </li>
           <li>
             <a class="nav-link" href="../logout.php">Logout</a>
@@ -83,6 +73,7 @@ $_POST['action_button'];
          <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
+              <a class="nav-link active" href="../html/projectoverview.html"></a>
             </li>
 <!--OTHER LINKS FOR DEEPER VIEWS
             <li class="nav-item">
@@ -142,9 +133,9 @@ $_POST['action_button'];
               exit;
             }
 
-            $qureyString = "SELECT Username, FName, LName, Password, Email FROM Users WHERE UserID = ". $UserID .";";
+            $qureyString = "SELECT Username, FName, LName, Password, Email FROM Users WHERE UserID = ". $UserID .";"
 
-             if($result = mysqli_query($conn, $qureyString)){
+             if($result = mysqli_query($conn, $queryString)){
               while($row = mysqli_fetch_array($result)){
 
 
@@ -176,6 +167,17 @@ $_POST['action_button'];
                   <th>Last Name:</th>
                   <td>
                     <input type = 'text' id='last' name = 'LName' size = '45' value=". $LName .">
+                  </td>
+                </tr>
+              </label>
+              </thead>
+      
+       <label>
+              <thead>
+                <tr>
+                  <th>Username:</th>
+                  <td>
+                    <input type = 'text' id='username' name = 'Username' size = '45' value=". $Username .">
                   </td>
                 </tr>
               </label>
@@ -218,15 +220,7 @@ $_POST['action_button'];
         <input type= 'submit' class='btn btn-lg btn-primary'  name='sumbit' value='UPDATE'>
         <input type= 'reset' class='btn btn-lg btn-primary' name='reset' value='RESET'>
 
-      </form>";
-    }
-    }
-    else{
-      echo "ERROR: Couldn't complete query" . mysqli_error($link);
-      mysqli_free_result($result); 
-    }
-
-          mysqli_close($link);
+      </form>"
 
           ?>
 
@@ -253,8 +247,7 @@ $_POST['action_button'];
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../Resources/js/popper.min.js"></script>
-    <script src="../../Resources/js/bootstrap.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
->>>>>>> web-branch-v2

@@ -1,0 +1,174 @@
+
+<!--
+  USER PREFERENCE {s.dot}
+  http://public.csusm.edu/mettavy/sdot/Users/UserPreferences/usersPref.html
+  
+  ** DENISE THUY VY NGUYEN 
+  http://cis444.cs.csusm.edu/nguye208/sdot/html/viewprojects.html
+  ** =^.,.^= 10-23-2-17
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <title>{s.dot} Choose Project</title>
+      <link rel="icon" href="../images/sdot.png" />
+
+<!--BOOTSTRAP-->
+    <link href="../../Resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../../Resources/css/sdot.css" rel="stylesheet">
+    <link href="../../Resources/css/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+<!--TOP NAV-->
+     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="../../Resources/html/index.html">
+        <img src="../../Resources/images/sdot.png" width="autp" height="25" align="text-center">
+      {s.dot}
+    </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+<!--TOP NAV-->
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../../Resources/html/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../Project/CreateProject/createProject.html">Create Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.php">Choose Project</a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="userPreferences.php">User Preferences</a>
+          </li>
+          <li>
+            <a class="nav-link" href="../logout.php">Logout</a>
+          </li>
+        </ul>
+
+<!--SERACH FUNCTION
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      -->
+        </div>
+      </nav>
+    </header>
+
+<!--SIDE NAV-->
+    <div class="container-fluid">
+      <div class="row">
+         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="../html/projectoverview.html"></a>
+            </li>
+<!--OTHER LINKS FOR DEEPER VIEWS
+            <li class="nav-item">
+              <a class="nav-link" href="../html/bugtrack.html">Bug Tracking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/tasktrack.html">Task Tracking</a>
+            </li>
+          -->
+          </ul>
+        </nav>
+
+<!--MAIN CONTENT-->
+
+    <div class="container-fluid">
+      <div class="row">
+         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item"
+            </li>
+
+        </nav>
+		<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+          <h1>Profile Preferences {s.dot}
+          <img src="../images/sdot.png" width="autp" height="50" align="text-center"></h1>
+
+<!--PHP-->	  
+<?php
+$link = mysqli_connect("localhost", "group_e", "sdotDB", "group_e");
+
+if (!$link) {
+    echo "Error: Unable to create account" . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+
+// Escape user inputs for security
+$UserID = mysqli_real_escape_string($link, $_REQUEST['UserID']);
+$Username = mysqli_real_escape_string($link, $_REQUEST['Username']);
+$FName = mysqli_real_escape_string($link, $_REQUEST['FName']);
+$LName = mysqli_real_escape_string($link, $_REQUEST['LName']);
+$Password = mysqli_real_escape_string($link, $_REQUEST['Password']);
+$Email = mysqli_real_escape_string($link, $_REQUEST['Email']);
+
+
+
+$UserID = isset($_COOKIE["SDOT_user_login"]);
+ 
+// attempt update query execution
+$sql = "UPDATE Users SET FName = '".$FName."', LName = '".$LName."', Password = '".$Password."', Email = '".$Email."'  
+WHERE UserID =  " . $UserID . ";";
+
+if(mysqli_query($link, $sql)){
+    echo "Records Updated successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+mysqli_close($link);
+?>	
+<script>
+  window.setTimeout(function(){
+        // Move to a new location or you can do something else
+        window.location.href = "userPreferences.php";
+
+    }, 5000);
+</script>
+
+
+<!--END USER PROFILE FORM--> 
+
+
+          </div>
+        </main>
+<!--END MAIN CONTENT-->
+
+
+
+      </div>
+    </div>
+
+          
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+  </body>
+</html>
+ 

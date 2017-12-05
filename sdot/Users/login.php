@@ -36,11 +36,7 @@
 
 	<!--TOP NAV--> 
 	      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-<<<<<<< HEAD
-	         <a class="navbar-brand" href="../Resources/html/index.html">
-=======
 	         <a class="navbar-brand" href="../Resources/html/about.html">
->>>>>>> web-branch-v2
 	        <img src="../Resources/images/sdot.png" width="autp" height="25" align="text-center">
 	      {s.dot}
 	    </a>
@@ -50,13 +46,8 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	         <ul class="navbar-nav">
-<<<<<<< HEAD
-	           </li>
-	            <a class="nav-link" href="../Resources/html/about.html">About</a>
-=======
 	         	<li>
 	           <a class="nav-link" href="../Resources/html/about.html">About</a>
->>>>>>> web-branch-v2
 	          </li>
 	            <li class="nav-item">
 	            <a class="nav-link" href="NewUser/signup.html">Sign Up</a>
@@ -86,61 +77,55 @@
 	          {s.dot}
 	        </p>
 
-	<!--NEW SIGNUP FORM-->
-<<<<<<< HEAD
-	          <form id="myForm">
-=======
-	          <form id="myForm" action = "login.php" method = "post">
->>>>>>> web-branch-v2
-	          <h2>Enter in user ID and password</h2>
-	          <div class="table-responsive">
-	            <table class="table table-striped">
-	              <thead>
-	                <tr>
-	                  <th>Username:</th>
-	                  <td>
-<<<<<<< HEAD
-	                    <input type = "text" id="projectName" size = "60" placeholder="Enter in username" onchange=""/>
-=======
-	                    <input type = "text" id="projectName" name = "Username" size = "60" placeholder="Enter in username" onchange=""/>
->>>>>>> web-branch-v2
-	                  </td>
-	                </tr>
-	              </thead>
+	<!--PHP-->
+	 <?php
+ $link = mysqli_connect("localhost", "group_e", "sdotDB", "group_e");
 
-	              <tbody>
-	                <tr>
-	                  <th>Password:</th>
-	                  <td>
-<<<<<<< HEAD
-	                    <input type = "text" id="collaborators" size = "60" placeholder="Enter in a password" onchange=""/>
-=======
-	                    <input type = "text" id="collaborators" name = "Password" size = "60" placeholder="Enter in a password" onchange=""/>
->>>>>>> web-branch-v2
-	                  </td>
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+// Escape user inputs for security
+$Username = mysqli_real_escape_string($link, $_REQUEST['Username']);
+$Password = mysqli_real_escape_string($link, $_REQUEST['Password']);
+ 
+// attempt insert query execution
+$sql = "SELECT UserID, FName, LName FROM Users WHERE Username = '" . $Username . "' and Password = '" . $Password ."'";
+if ($result=mysqli_query($link,$sql))
+  {
+  $rowcount=mysqli_num_rows($result);
+  if ($rowcount == 1)
+  {
+	  $row=mysqli_fetch_row($result);
+	  
+		$cookie_name = "SDOT_user_login";
+		$cookie_name_info = $row[0];
+		
+		$cookie_FName = "SDOT_user_FName";
+		$cookie_FName_info = $row[1];
+		
+		$cookie_LName = "SDOT_user_LName";
+		$cookie_LName_info = $row[2];
+	
+		// cookie set for one day 
+		setcookie($cookie_name, $cookie_name_info, time() + (86400), "/");
+	  
+	    
+	echo "<script type='text/javascript'>
+           window.location = '../Resources/html/index.php'
+      </script>";  
+  }
+  else echo "Error, cannot find the account. Please try again!";
+  mysqli_free_result($result);
+}
 
-	                </tr>
-	              </tbody>
-	            </table>
-<<<<<<< HEAD
-	           <a class="btn btn-lg btn-primary" href="" role="button">Login</a>
-	          <a class="btn btn-lg btn-primary"  type="button" value="reset" onclick="clearProject()">
-	          Clear
-	        </a>
+mysqli_close($link);
+ 
 
-	           <p><p>
-
-	          <a class="btn btn-lg btn-primary" href="../Resources/html/index.html" role="button">{s.dot}</a>
-	        </p>
-	      </p>
-=======
-	           <input class="btn btn-lg btn-primary" href="" type = "submit" value = "login">
-	          <input class="btn btn-lg btn-primary" type="reset" value="reset">
->>>>>>> web-branch-v2
-	    </div>
-	  </form>
-	</div>
-	<!--END NEW PEOJECT FORM--> 
+  	
+   ?>
 	  </body>
 	</html>
 

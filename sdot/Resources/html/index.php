@@ -29,38 +29,18 @@
         <a class="navbar-brand" href="../html/index.html">
           <img src="../images/sdot.png" width="autp" height="25">
             {s.dot}
-<<<<<<< HEAD
           </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-=======
-        </a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
-                data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
->>>>>>> web-branch-v2
         </button>
 
 <!--TOP NAV-->
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="../html/index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="../html/index.php">Home</a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
-            <a class="nav-link" href="../../Project/CreateProject/createProject.html">Create Project</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.html">Choose Project</a>
-          </li>
-         <li class="nav-item">
-            <a class="nav-link" href="../../Users/UserPreferences/userPreferences.html">User Preferences</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../Users/logout.html">Logout</a>
-=======
             <a class="nav-link" href="../../Project/CreateProject/createProject1.php">Create Project</a>
           </li>
           <li class="nav-item">
@@ -71,7 +51,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../Users/logout.php">Logout</a>
->>>>>>> web-branch-v2
           </li>
         </ul>
         </div>
@@ -83,7 +62,6 @@
       <div class="row">
         <div class="jumbotron mt-4 .col-6 .col-md-4">
 
-<<<<<<< HEAD
       <h1>{s.dot}</h1>
         <section class="row text-center placeholders">            
           <img src="../images/sdot.png" width="autp" height="400">
@@ -92,21 +70,6 @@
             During SCRUM development cycle (a specific class example would be CS 441), there seemed to be a lack of accessible automation tools that would allow for software team communication, task tracking and bug tracking.  Most groups default to using a mix of tools and manual documentation methods, such as Excel or Access, in association with GitHub and email communication or outside forums.  </br>
             We would like to implement a website, {s.dot} (SCRUM Developer Online Tracker) that would allow for this type of data to be collected centrally, allowing for easier documentation, centralization and availability, all the while reducing the need for multiple outside tools.
           </p>
-=======
-            <h1>{s.dot}</h1>
-            <section class="row text-center placeholders">
-                <img src="../images/sdot.png" width="autp" height="400">
-            </section>
-            <p>
-                During SCRUM development cycle (a specific class example would be CS 441), there seemed to be a lack of
-                accessible automation tools that would allow for software team communication, task tracking and bug
-                tracking. Most groups default to using a mix of tools and manual documentation methods, such as Excel or
-                Access, in association with GitHub and email communication or outside forums.  </br>
-                We would like to implement a website, {s.dot} (SCRUM Developer Online Tracker) that would allow for this
-                type of data to be collected centrally, allowing for easier documentation, centralization and
-                availability, all the while reducing the need for multiple outside tools.
-            </p>
->>>>>>> web-branch-v2
 
           </div>
         </main>
@@ -117,7 +80,6 @@
 </html>
 
 
-<<<<<<< HEAD
 
 
     <!-- Bootstrap core JavaScript
@@ -127,14 +89,3 @@
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-=======
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
->>>>>>> web-branch-v2

@@ -30,11 +30,7 @@
     <header>
 
 <!--TOP NAV--> 
-<<<<<<< HEAD
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-=======
-      <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
->>>>>>> web-branch-v2
         <a class="navbar-brand" href="../../Resources/html/index.html">
           <img src="../../Resources/images/sdot.png" width="autp" height="25" align="text-center">
           {s.dot}
@@ -50,26 +46,9 @@
             <a class="nav-link" href="../../Resources/html/index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../../Project/CreateProject/createProject.html">Create Project</a>
+            <a class="nav-link active" href="../../Project/CreateProject/createProject1.php">Create Project</a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
-            <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.html">Choose Project</a>
-          </li>
-         <li class="nav-item">
-            <a class="nav-link" href="../../Users/UserPreferences/userPreferences.html">User Preferences</a>
-          </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../../Users/logout.html">Logout</a>
-        </li>
-        </ul>
-        <!--SEARCH FUNCTION
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        -->
-=======
             <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.php">Choose Project</a>
           </li>
          <li class="nav-item">
@@ -79,35 +58,18 @@
             <a class="nav-link" href="../../Users/logout.php">Logout</a>
         </li>
         </ul>
->>>>>>> web-branch-v2
         </div>
       </nav>
     </header>
 <!--TOP NAV--> 
 
-<<<<<<< HEAD
 <!--SIDE NAV--> 
     <div class="container-fluid">
       <div class="row">
-               <!--
-         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="../html/projectoverview.html">Overview</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../html/bugtrack.html">Bug Tracking</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../html/tasktrack.html">Task Tracking</a>
-            </li>
-          -->
           </ul>
         </nav>
 <!--END SIDE NAV--> 
 
-=======
->>>>>>> web-branch-v2
 
 <!-- MAIN BODY
   User will create a new project
@@ -129,11 +91,7 @@
                 <tr>
                   <th>Project Name:</th>
                   <td>
-<<<<<<< HEAD
-                    <input type = "text" id="projectName" size = "45" placeholder="Enter in a project name" onchange=""/>
-=======
                     <input type = "text" id="projectName" size = "45" name = "ProjectName" placeholder="Enter in a project name" onchange=""/>
->>>>>>> web-branch-v2
                   </td>
                 </tr>
               </thead>
@@ -142,11 +100,36 @@
                 <tr>
                   <th>Collaborators:</th>
                   <td>
-<<<<<<< HEAD
-                    <input type = "text" id="collaborators" size = "45" placeholder="Enter in all collaborators" onchange=""/>
-=======
-                    <input type = "text" id="collaborators" size = "45" name = "Username" placeholder="Enter in all collaborators" onchange=""/>
->>>>>>> web-branch-v2
+                      <select name = "Username" id="Username" multiple="multiple" >
+                  <?php
+ $link = mysqli_connect("localhost", "group_e", "sdotDB", "group_e");
+
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+// Escape user inputs for security
+$teamid = mysqli_real_escape_string($link, $_REQUEST['teamid']);
+ 
+// attempt insert query execution
+$sql = "SELECT UserID, Username FROM Users";
+if ($result=mysqli_query($link,$sql))
+  {
+
+  // Fetch one and one row
+  while ($row=mysqli_fetch_row($result))
+    {
+    echo "
+	   <option value = " .$row[0]. ">" . $row[1] . ", " . $row[2]. "</option>";
+    }
+  // Free result set
+  mysqli_free_result($result);
+}
+
+mysqli_close($link); 	
+   ?></select>
                   </td>
 
                 </tr>
@@ -155,11 +138,7 @@
                   <tr>
                   <th>Project Summary:</th>
                    <td>
-<<<<<<< HEAD
-                    <input type = "text" id="summary" size = "45" placeholder="Enter in a project description" onchange=""/>
-=======
                     <input type = "text" id="summary" size = "45" name = "ProjectSummary" placeholder="Enter in a project description" onchange=""/>
->>>>>>> web-branch-v2
                   </td>
                 </tr>
 
@@ -167,18 +146,9 @@
             </table>
           </div>
 
-<<<<<<< HEAD
-          <a class="btn btn-lg btn-primary" role="button" value="GetProjectInfo" onclick="createProject();">
-          Create
-        </a>
-        <a class="btn btn-lg btn-primary" role="button" value="reset" onclick="clearProject()">
-          Clear
-        </a>
-=======
         <input type = "submit" class="btn btn-lg btn-primary" name = "submit" value="CREATE">
         <input type= "reset" class="btn btn-lg btn-primary" name="reset" value="CLEAR">
 
->>>>>>> web-branch-v2
       </form>
 <!--END NEW PEOJECT FORM-->
 
@@ -187,11 +157,6 @@
       </div>
     </div>
 </div>
-<<<<<<< HEAD
-=======
-  </body>
-</html>
->>>>>>> web-branch-v2
 
 <!-- Bootstrap core JavaScript-->
     <script type = "text/javascript"  src = "createProject.js"></script>
@@ -202,11 +167,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-<<<<<<< HEAD
+    <script src="../../Resources/js/popper.min.js"></script>
+    <script src="../../Resources/js/bootstrap.min.js"></script>
   </body>
 </html>
-=======
-
->>>>>>> web-branch-v2
