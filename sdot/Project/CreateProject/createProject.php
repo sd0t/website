@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-//CREATES A NEW PROJECT
-<?php 
-$_POST['action_button']; 
-?> 
-=======
 <!--
   CREATE NEW PROJECT {s.dot}
   http://cis444.cs.csusm.edu/nguye208/sdot/html/createProject.html
@@ -49,10 +43,10 @@ $_POST['action_button'];
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../../Resources/html/index.html">Home</a>
+            <a class="nav-link" href="../../Resources/html/index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../../Project/CreateProject/createProject.php">Create Project</a>
+            <a class="nav-link active" href="../../Project/CreateProject/createProject.html">Create Project</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../Project/ProjectHub/ProjectOverview/chooseProject.php">Choose Project</a>
@@ -78,90 +72,78 @@ $_POST['action_button'];
 <!--SIDE NAV--> 
     <div class="container-fluid">
       <div class="row">
+               <!--
+         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="../html/projectoverview.html">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/bugtrack.html">Bug Tracking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../html/tasktrack.html">Task Tracking</a>
+            </li>
+          -->
           </ul>
         </nav>
 <!--END SIDE NAV--> 
 
+
+<!--PHP-->
+<?php
+$link = mysqli_connect("localhost", "group_e", "sdotDB", "group_e");
+
+if (!$link) {
+    echo "Error: Unable to create project" . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+
+echo "You have created a project!" . PHP_EOL;
+
+
+// Escape user inputs for security
+$ProjectID = mysqli_real_escape_string($link, $_REQUEST['ProjectID']);
+$ProjectName = mysqli_real_escape_string($link, $_REQUEST['ProjectName']);
+$ProjectSummary = mysqli_real_escape_string($link, $_REQUEST['ProjectSummary']);
+ 
+// attempt insert query execution
+$sql = "INSERT INTO Projects (ProjectName, ProjectSummary) VALUES ('$ProjectName','$ProjectSummary')";
+if(mysqli_query($link, $sql)){
+    echo "Records added successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+foreach($_REQUEST['Username'] AS $val) {//for cycle, for each element it will be assign as item to val.
+    $UserID = mysqli_real_escape_string($link, $val);//for each user there will be an insert into project members
+	$sql = "INSERT INTO ProjectMembers (PMProjectID, PMUserID) VALUES (LAST_INSERT_ID(), ". $UserID .")";//taking user id 
+	if(mysqli_query($link, $sql)){
+		echo "Records added successfully.";
+	} else{
+		echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+}
+
+
+
+mysqli_close($link);
+?>		
 
 <!-- MAIN BODY
   User will create a new project
 -->
   <div class="container">
    <div class="jumbotron mt-3">
-          <h1>Create New Project                       
+          <h1>Project Created                       
             <img src="../../Resources/images/sdot.png" width="autp" height="50" style="text-align:center"></h1>
        
             <section class="row text-center placeholders">
           </section>
 
-<!--NEW PEOJECT FORM-->
-          <form action ="createProject1.php" id="myForm" method="post">
-          <h2>Enter in project information</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Project Name:</th>
-                  <td>
-                    <input type = "text" id="projectName" size = "45" name = "ProjectName" placeholder="Enter in a project name" onchange=""/>
-                  </td>
-                </tr>
-              </thead>
 
-              <tbody>
-                <tr>
-                  <th>Collaborators:</th>
-                  <td>
-                      <select multiple="multiple" style="width:100px; display:block;" >
-                  <?php
- $link = mysqli_connect("localhost", "group_e", "sdotDB", "group_e");
-
-if (!$link) {
-    echo "Error: Unable to connect to MySQL." . PHP_EOL;
-    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-    exit;
-}
-// Escape user inputs for security
-$teamid = mysqli_real_escape_string($link, $_REQUEST['teamid']);
- 
-// attempt insert query execution
-$sql = "SELECT UserID, Username FROM Users";
-if ($result=mysqli_query($link,$sql))
-  {
-
-  // Fetch one and one row
-  while ($row=mysqli_fetch_row($result))
-    {
-    echo "
-	   <option value = " .$row[0]. ">" . $row[1] . ", " . $row[2]. "</option>";
-    }
-  // Free result set
-  mysqli_free_result($result);
-}
-
-mysqli_close($link); 	
-   ?></select>
-                  </td>
-
-                </tr>
-
-
-                  <tr>
-                  <th>Project Summary:</th>
-                   <td>
-                    <input type = "text" id="summary" size = "45" name = "ProjectSummary" placeholder="Enter in a project description" onchange=""/>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-
-        <input type = "submit" class="btn btn-lg btn-primary" name = "submit" value="CREATE">
-        <input type= "reset" class="btn btn-lg btn-primary" name="reset" value="CLEAR">
-
-      </form>
+       
 <!--END NEW PEOJECT FORM-->
 
 
@@ -173,14 +155,21 @@ mysqli_close($link);
 <!-- Bootstrap core JavaScript-->
     <script type = "text/javascript"  src = "createProject.js"></script>
     <script type = "text/javascript"  src = "../../User/NewUser/usercheck/pswd_chk.js" ></script>
-
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#boot-multiselect-demo').multiselect({
+            includeSelectAllOption: true,
+            buttonWidth: 250,
+            enableFiltering: true
+        });
+        });
+    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../Resources/js/popper.min.js"></script>
-    <script src="../../Resources/js/bootstrap.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
->>>>>>> web-branch-v2

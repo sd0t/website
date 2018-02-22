@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// SIGNUP.PHP FOR NEW USER
-//** DENISE THUY VY NGUYEN 
-//** =^.,.^= 11-16-2-17
-//CREATES A NEW USER
-
-<?php 
-$_POST['action_button']; 
-?> 
-=======
 <!--
     SIGN UP
     ** DENISE THUY VY NGUYEN 
@@ -223,4 +213,3 @@ mysqli_close($link);
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
->>>>>>> web-branch-v2
